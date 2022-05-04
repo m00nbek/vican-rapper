@@ -141,7 +141,7 @@ extension MainViewController {
 	private func startRecording() {
 		NRSpeechToText.shared.startRecording { (result: String?, isFinal: Bool, error: Error?) in
 			if error != nil {
-				print(error)
+				print(error!)
 			}
 			if error == nil {
 				OperationQueue.main.addOperation {
