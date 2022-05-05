@@ -12,6 +12,7 @@
 		3B98F7CD282275B200B8CC91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B98F7CC282275B200B8CC91 /* Assets.xcassets */; };
 		3B98F7D0282275B200B8CC91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B98F7CE282275B200B8CC91 /* LaunchScreen.storyboard */; };
 		3B98F7D82822793800B8CC91 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B98F7D72822793800B8CC91 /* MainViewController.swift */; };
+		3BBEDC9E282382CE002BCA04 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBEDC9D282382CE002BCA04 /* Utilities.swift */; };
 		B4EEFD5E516D9EF5DAE75F29 /* Pods_vican.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743BEA859B7A9F743A269D61 /* Pods_vican.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		3B98F7CF282275B200B8CC91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B98F7D1282275B200B8CC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B98F7D72822793800B8CC91 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3BBEDC9D282382CE002BCA04 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		743BEA859B7A9F743A269D61 /* Pods_vican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BB0ED517971F38DD8EBE30 /* Pods-vican.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vican.debug.xcconfig"; path = "Target Support Files/Pods-vican/Pods-vican.debug.xcconfig"; sourceTree = "<group>"; };
 		B9CAFAB397A0F57E8DAAC26F /* Pods-vican.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vican.release.xcconfig"; path = "Target Support Files/Pods-vican/Pods-vican.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				3B98F7C3282275B000B8CC91 /* AppDelegate.swift */,
 				3B98F7C5282275B000B8CC91 /* SceneDelegate.swift */,
 				3B98F7D72822793800B8CC91 /* MainViewController.swift */,
+				3BBEDC9D282382CE002BCA04 /* Utilities.swift */,
 				3B98F7CC282275B200B8CC91 /* Assets.xcassets */,
 				3B98F7CE282275B200B8CC91 /* LaunchScreen.storyboard */,
 				3B98F7D1282275B200B8CC91 /* Info.plist */,
@@ -77,7 +80,6 @@
 				B3BB0ED517971F38DD8EBE30 /* Pods-vican.debug.xcconfig */,
 				B9CAFAB397A0F57E8DAAC26F /* Pods-vican.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -205,6 +207,7 @@
 			files = (
 				3B98F7D82822793800B8CC91 /* MainViewController.swift in Sources */,
 				3B98F7C4282275B000B8CC91 /* AppDelegate.swift in Sources */,
+				3BBEDC9E282382CE002BCA04 /* Utilities.swift in Sources */,
 				3B98F7C6282275B000B8CC91 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

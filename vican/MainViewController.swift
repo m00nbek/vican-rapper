@@ -17,22 +17,8 @@ class MainViewController: UIViewController {
 		configureUI()
 		setup()
 		checkMicPermission()
-		
-		self.timer = Timer.scheduledTimer(withTimeInterval: 1.4, repeats: true, block: { _ in
-			if !NRSpeechToText.shared.isRunning {
-				guard let startText = self.startBtn.titleLabel?.text else {return}
-				if startText == "Stop" {
-					self.startRecording()
-				}
-			}
-			guard let text = self.usersText.text else {return}
-			if text.count > 70 {
-				NRSpeechToText.shared.stop()
-			}
-		})
 	}
 	// MARK: - Properties
-	var timer = Timer()
 	private let headerTitle: UILabel = {
 		let label = UILabel()
 		label.text = "Viçan"
@@ -55,9 +41,13 @@ class MainViewController: UIViewController {
 	}()
 	private let resultText: UILabel = {
 		let label = UILabel()
+		label.text = "Your rhymes are gonna appear here"
+		label.textColor = .init(red: 54/255, green: 174/255, blue: 124/255, alpha: 1)
 		label.numberOfLines = 0
+		label.font = .systemFont(ofSize: 35)
 		label.adjustsFontSizeToFitWidth = true
 		label.textAlignment = .center
+		label.allowsDefaultTighteningForTruncation = true
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -69,8 +59,6 @@ class MainViewController: UIViewController {
 		btn.translatesAutoresizingMaskIntoConstraints = false
 		return btn
 	}()
-	// MARK: - Selectors
-	// MARK: - API
 	// MARK: - Functions
 	private func configureUI() {
 		view.backgroundColor = .init(red: 57/255, green: 62/255, blue: 70/255, alpha: 1)
@@ -144,11 +132,51 @@ extension MainViewController {
 				print(error!)
 			}
 			if error == nil {
+				guard let result = result else {return}
+				let resultByWords = result.byWords
+				let lastWord = String(resultByWords.last!)
+				
+				self.getRhyme(for: lastWord)
+				
+				
+				guard let userText = self.usersText.text else {return}
+				if userText.count > 40 || userText == "Press start to start!" {
+					OperationQueue.main.addOperation {
+						self.usersText.text = lastWord
+					}
+				}
 				OperationQueue.main.addOperation {
-					self.usersText.text = result
+					self.usersText.text! += " \(lastWord)"
 				}
 			}
 		}
+	}
+}
+
+// MARK: - Networking
+extension MainViewController {
+	private func getRhyme(for word: String) {
+		let url = URL(string: "https://api.datamuse.com/words?rel_rhy=\(word)")
+		URLSession.shared.dataTask(with: url!) { data, res, error in
+			if error != nil {
+				print(error!)
+				return
+			}
+			do {
+				guard let data = data else {return}
+				let rhymes = try JSONDecoder().decode([RhymeRes].self, from: data)
+				OperationQueue.main.addOperation {
+					self.resultText.text = ""
+				}
+				for rhyme in rhymes.prefix(10) {
+					OperationQueue.main.addOperation {
+						self.resultText.text! += " \(rhyme.word)"
+					}
+				}
+			} catch {
+				print(error)
+			}
+		}.resume()
 	}
 }
 
