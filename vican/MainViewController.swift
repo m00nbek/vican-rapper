@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
 		checkMicPermission()
 	}
 	// MARK: - Properties
+	var userResult = ""
 	private let headerTitle: UILabel = {
 		let label = UILabel()
 		label.text = "Viçan"
@@ -133,6 +134,7 @@ extension MainViewController {
 			}
 			if error == nil {
 				guard let result = result else {return}
+				self.userResult = result
 				let resultByWords = result.byWords
 				let lastWord = String(resultByWords.last!)
 				
@@ -164,13 +166,17 @@ extension MainViewController {
 			}
 			do {
 				guard let data = data else {return}
-				let rhymes = try JSONDecoder().decode([RhymeRes].self, from: data)
+				var rhymes = try JSONDecoder().decode([RhymeRes].self, from: data)
 				OperationQueue.main.addOperation {
 					self.resultText.text = ""
 				}
-				for rhyme in rhymes.prefix(10) {
-					OperationQueue.main.addOperation {
-						self.resultText.text! += " \(rhyme.word)"
+				for rhyme in rhymes.prefix(25) {
+					if !self.userResult.contains(rhyme.word) {
+						OperationQueue.main.addOperation {
+							self.resultText.text! += " \(rhyme.word)"
+						}
+					} else {
+						rhymes.removeFirst()
 					}
 				}
 			} catch {
